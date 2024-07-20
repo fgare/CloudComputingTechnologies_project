@@ -1,9 +1,10 @@
 import paho.mqtt.client as mqtt
 import datetime
 
-
+'''
 def _on_publish(client, userdata, mid):
     print("Published ")
+'''
 
 
 class Sender:
@@ -14,7 +15,7 @@ class Sender:
     # si connette al server mqtt
     def _connect(self) -> mqtt.Client:
         client = mqtt.Client()
-        client.on_publish = _on_publish
+        # client.on_publish = _on_publish
         client.connect('localhost', 1883, 60)
         return client
 
@@ -30,7 +31,6 @@ class Sender:
         # Converti il numero in esadecimale
         numero_hex = hex(value)[2:]
 
-        print(data_ora_hex, numero_hex)
         # Concatenazione dei valori esadecimali
         risultato = data_ora_hex + numero_hex
 

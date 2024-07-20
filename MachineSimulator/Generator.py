@@ -1,14 +1,17 @@
 import datetime
 import time
-from Publisher.Sender import Sender
+from MachineSimulator.Sender import Sender
 import random
+import threading
 
-TOPIC = "data/customer1/machine1"
 
-
-class Generator:
-    def __init__(self):
-        self.sender = Sender(TOPIC)
+class Generator(threading.Thread):
+    def __init__(self, customer, machine):
+        threading.Thread.__init__(self)
+        self.customer = customer
+        self.machine = machine
+        self.topic = 'data/' + customer + '/' + machine
+        self.sender = Sender(self.topic)
 
     def run(self):
         mean = random.randint(0, 100)
@@ -18,8 +21,8 @@ class Generator:
             now = datetime.datetime.now()
             self.sender.publish(now, value)
             print("Invio ", now, ", ", value)
-            time.sleep(2)
+            time.sleep(5)
 
 
 if __name__ == "__main__":
-    Generator().run()
+    Generator('customer1', 'machine1').run()

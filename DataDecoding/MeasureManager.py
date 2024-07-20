@@ -1,14 +1,16 @@
-from Subscriber.Decoder import Decoder
-from Subscriber.DBConnector import DBConnector
+from DataDecoding.Decoder import Decoder
+from DataDecoding.DBConnector import DBConnector
 
 
 class MeasureManager:
     def __init__(self, topic, datum):
         self.topic = topic
         self.datum = datum
+        self.decode_packet()
 
-    def decode(self):
-        self.datum = Decoder().decode_hex(self.datum)
+    def decode_packet(self):
+        self.datum = Decoder.decode_hex(self.datum)
+        print("Datum ", self.datum)
 
     def _get_topic_hierarchy(self):
         return self.topic.split('/')

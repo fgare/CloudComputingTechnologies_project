@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
-from Subscriber.Decoder import Decoder
-from Subscriber.MeasureManager import MeasureManager
+from DataDecoding.Decoder import Decoder
+from DataDecoding.MeasureManager import MeasureManager
 
 TOPIC = 'data/#'
 
