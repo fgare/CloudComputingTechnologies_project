@@ -1,5 +1,5 @@
-from DataDecoding.Decoder import Decoder
-from DataDecoding.DBConnector import DBConnector
+from Decoder import Decoder
+from DBConnector import DBConnector
 
 
 class MeasureManager:

@@ -1,6 +1,5 @@
 import paho.mqtt.client as mqtt
-from DataDecoding.Decoder import Decoder
-from DataDecoding.MeasureManager import MeasureManager
+from MeasureManager import MeasureManager
 
 TOPIC = 'data/#'
 
@@ -19,6 +18,7 @@ class Receiver():
         MeasureManager(msg.topic, msg.payload.decode()).write_measure()
 
     def run(self):
+        print("Avviato")
         client = self._connect()
         client.subscribe(TOPIC)
         client.loop_forever()
