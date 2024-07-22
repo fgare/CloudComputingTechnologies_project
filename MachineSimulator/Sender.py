@@ -16,7 +16,7 @@ class Sender:
     def _connect(self) -> mqtt.Client:
         client = mqtt.Client()
         # client.on_publish = _on_publish
-        client.connect('localhost', 1883, 60)
+        client.connect('192.168.1.4', 1883, 60)
         return client
 
     def publish(self, dt: datetime, value):

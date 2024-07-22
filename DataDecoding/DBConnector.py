@@ -26,7 +26,7 @@ class DBConnector:
         self._close_connection()
 
     def _connect(self):
-        server = MongoClient('localhost', 27017)
+        server = MongoClient('192.168.1.4', 27017)
         self.db = server[DBNAME]
         self.collection = self.db[COLLECTION]
         print("Connected to MongoDB")

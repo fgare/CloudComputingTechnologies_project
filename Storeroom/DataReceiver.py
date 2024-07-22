@@ -1,10 +1,10 @@
 import paho.mqtt.client as mqtt
-from MeasureManager import MeasureManager
+from StoreConnector import StoreConnector
 
 TOPIC = 'data/#'
 
 
-class Receiver:
+class DataReceiver:
     def __init__(self):
         pass
 
@@ -15,7 +15,8 @@ class Receiver:
         return client
 
     def on_message(self, client, userdata, msg):
-        MeasureManager(msg.topic, msg.payload.decode()).write_measure()
+        hierarchy = msg.topic.split('/')
+        StoreConnector(hierarchy[1], hierarchy[2], msg.payload.decode()).run()
 
     def run(self):
         print("Avviato")
@@ -26,4 +27,4 @@ class Receiver:
 
 
 if __name__ == '__main__':
-    Receiver().run()
+    DataReceiver().run()
