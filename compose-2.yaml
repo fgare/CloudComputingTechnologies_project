@@ -1,0 +1,43 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    restart: always
+    ports:
+      - "1883:1883"
+    #  - "9001:9001"
+    volumes:
+      - C:\Users\Federico\Documents\GitHub\cct_project\persistentData\mosquitto\config:/mosquitto/config
+    networks:
+      - can
+    #  - mosquitto_data:/mosquitto/data
+    #  - mosquitto_log:/mosquitto/log
+
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - can
+
+  storeroom:
+    image: storeroom-i:4
+    container_name: storeroom
+    restart: always
+    networks:
+      - can
+      
+volumes:
+  minio_data:
+
+networks:
+  can:

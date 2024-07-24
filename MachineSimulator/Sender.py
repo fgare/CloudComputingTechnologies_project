@@ -16,11 +16,14 @@ class Sender:
     def _connect(self) -> mqtt.Client:
         client = mqtt.Client()
         # client.on_publish = _on_publish
-        client.connect('192.168.1.4', 1883, 60)
+        client.connect('localhost', 1883, 60)
+        client.username_pw_set(username='federico', password='mosquitto')
+        print("Connected to MQTT Broker")
         return client
 
     def publish(self, dt: datetime, value):
-        self.broker.publish(self.topic, self._preparePacket(dt,value), qos=0)
+        self.broker.publish(self.topic, self._preparePacket(dt,value), qos=1)
+        print("Published")
 
     # converte le informazioni in esadecimale prima che vengano inviate
     def _preparePacket(self, dt: datetime, value: int):

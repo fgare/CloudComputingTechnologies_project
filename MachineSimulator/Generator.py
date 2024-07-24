@@ -1,6 +1,6 @@
 import datetime
 import time
-from MachineSimulator.Sender import Sender
+from Sender import Sender
 import random
 import threading
 

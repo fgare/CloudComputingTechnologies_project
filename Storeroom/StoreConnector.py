@@ -1,19 +1,32 @@
 import datetime
+import time
 import uuid
 from io import BytesIO
 from minio import Minio
+from Common.Useful import Useful
 
 minio_url = "minio:9000"  # URL del server MinIO
-access_key = "minioadmin"  # Chiave di accesso MinIO
-secret_key = "minioadmin"  # Chiave segreta MinIO
+access_key = "federico"  # Chiave di accesso MinIO
+secret_key = "federico"  # Chiave segreta MinIO
 
 
 class StoreConnector:
     def __init__(self, customer_name: str, machine_name: str, obj: str):
-        self.client = client = Minio(minio_url, access_key=access_key, secret_key=secret_key, secure=False)
+        self.client = self._connect()
         self.bucket_name = customer_name
         self.machine_name = machine_name
         self.object = obj
+        self.logger = Useful.getLogger('StoreConnector')
+        self.logger.info("Connected to Minio")
+
+    def _connect(self) -> Minio:
+        while True:
+            try:
+                return Minio(minio_url, access_key=access_key, secret_key=secret_key, secure=False)
+            except Exception as e:
+                self.logger.error("Connection failed")
+                self.logger.error(e)
+                time.sleep(5)
 
     def create_bucket(self) -> bool:
         if not self.client.bucket_exists(self.bucket_name):
@@ -35,5 +48,13 @@ class StoreConnector:
         # print("Started")
         self.create_bucket()
         self.write_string(self.bucket_name, self.object)
-        # print("Written")
+        print("Written")
+
+
+if __name__ == "__main__":
+    i = 0
+    while True:
+        StoreConnector("customertest", "machinetest", f"value_{i}").run()
+        i+=1
+        time.sleep(5)
 

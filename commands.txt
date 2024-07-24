@@ -1,0 +1,5 @@
+MOSQUITTO
+docker run -d --name mosquitto -p 1883:1883 -v C:\Users\Federico\Documents\GitHub\cct_project\persistentData\mosquitto\config:/mosquitto/config --network can eclipse-mosquitto:latest
+
+MINIO
+docker run -d --name minio -p 9000:9000 -p 9001:9001 -e MINIO_ROOT_USER=minioadmin -e MINIO_ROOT_PASSWORD=minioadmin --network can quay.io/minio/minio:latest server /data --console-address ":9001"

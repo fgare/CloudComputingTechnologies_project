@@ -1,20 +1,25 @@
 from pymongo import MongoClient
+import threading
+from Useful import Useful
 
 DBNAME = "cct"
 COLLECTION = "measurements"
 
 
-class DBConnector:
-    def __init__(self):
+class DBConnector(threading.Thread):
+    def __init__(self, document: dict):
+        super().__init__()
         self.server = None
         self.db = None
         self.collection = None
-        self._connect()
+        self.document = document
+        self.logger = Useful.getLogger('mongoConnector')
+        self.start()
 
     def _close_connection(self):
         if self.server:
             self.server.disconnect()
-            print('Disconnected from server')
+            self.logger.debug('Disconnected from server')
 
     def __del__(self):
         self._close_connection()
@@ -26,23 +31,35 @@ class DBConnector:
         self._close_connection()
 
     def _connect(self):
-        server = MongoClient('192.168.1.4', 27017)
-        self.db = server[DBNAME]
-        self.collection = self.db[COLLECTION]
-        print("Connected to MongoDB")
+        try:
+            server = MongoClient(host='mongodb',
+                                 port=27017,
+                                 username="federico",
+                                 password="m0ng0",
+                                 authSource=DBNAME)
+            self.db = server[DBNAME]
+            self.collection = self.db[COLLECTION]
+            self.logger.debug("Connected to MongoDB")
+        except Exception as e:
+            self.logger.error("Failed to connect to MongoDB\n" + str(e))
 
-    def insert_document(self, document):
-        result = self.collection.insert_one(document)
-        print(f"Document inserted with _id: {result.inserted_id}")
+    def insert_document(self):
+        result = self.collection.insert_one(self.document)
+        self.logger.info(f"Document inserted with _id: {result.inserted_id}")
         return result.inserted_id
+
+    def run(self):
+        self._connect()
+        id = self.insert_document()
+        self.logger.info("document _id " + id)
 
 
 if __name__ == "__main__":
-    connector = DBConnector()
     doc = {
         "customer": "customer1",
         "machine": "machine1",
         "date": '2024-07-18T18:05:05Z',
         "EE": 32
     }
-    connector.insert_document(doc)
+    connector = DBConnector(doc)
+    connector.insert_document()

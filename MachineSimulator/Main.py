@@ -1,4 +1,4 @@
-from MachineSimulator.Generator import Generator
+from Generator import Generator
 
 if __name__ == '__main__':
     for i in range(1):

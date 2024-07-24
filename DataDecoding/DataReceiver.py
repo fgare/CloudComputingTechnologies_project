@@ -1,26 +1,40 @@
+import time
+
 import paho.mqtt.client as mqtt
 from MeasureManager import MeasureManager
+from Useful import Useful
 
+HOST = 'mosquitto'
 TOPIC = 'data/#'
 
 
 class Receiver:
     def __init__(self):
-        pass
+        self.logger = Useful.getLogger('Decoding-receiver')
 
     def _connect(self):
-        client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-        client.connect('mosquitto', 1883, 60)
-        client.on_message = self.on_message
-        return client
+        while True:
+            try:
+                client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+                client.on_connect = self.on_connect
+                client.on_message = self.on_message
+                client.connect(HOST, 1883, 60)
+                client.username_pw_set(username='federico', password='mosquitto')
+                return client
+            except Exception as e:
+                self.logger.error("Failed connecting to MQTT broker\n" + str(e))
+                time.sleep(5)
 
     def on_message(self, client, userdata, msg):
         MeasureManager(msg.topic, msg.payload.decode()).write_measure()
+        self.logger.info("Received " + msg.payload.decode())
+
+    def on_connect(self, client, userdata, flags, rc):
+        self.logger.info("Connected to MQTT broker with result code "+str(rc))
 
     def run(self):
-        print("Avviato")
+        self.logger.info("Avviato")
         client = self._connect()
-        print("Connesso")
         client.subscribe(TOPIC)
         client.loop_forever()
 

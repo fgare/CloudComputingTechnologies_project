@@ -26,4 +26,4 @@ class MeasureManager:
         return document
 
     def write_measure(self):
-        return DBConnector().insert_document(self._prepare_document())
+        return DBConnector(self._prepare_document())
