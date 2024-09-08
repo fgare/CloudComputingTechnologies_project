@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n+nt}{\PYGZdq{}customer\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}customer1\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{				}\PYG{n+nt}{\PYGZdq{}machine\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}machine1\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{				}\PYG{n+nt}{\PYGZdq{}date\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}2024\PYGZhy{}07\PYGZhy{}18T18:05:05Z\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{				}\PYG{n+nt}{\PYGZdq{}EE\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{32}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

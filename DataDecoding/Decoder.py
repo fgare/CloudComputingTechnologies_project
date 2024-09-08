@@ -5,6 +5,7 @@ class Decoder:
     def __init__(self):
         pass
 
+    @staticmethod
     def decode_hex(hex_str):
         # Estrai la parte della stringa che rappresenta la data e l'ora
         data_ora_hex = hex_str[:12]

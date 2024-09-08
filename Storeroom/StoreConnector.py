@@ -3,7 +3,7 @@ import time
 import uuid
 from io import BytesIO
 from minio import Minio
-from Common.Useful import Useful
+from Useful import Useful
 
 minio_url = "minio:9000"  # URL del server MinIO
 access_key = "federico"  # Chiave di accesso MinIO

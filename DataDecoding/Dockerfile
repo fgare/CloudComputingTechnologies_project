@@ -15,4 +15,4 @@ COPY . .
 RUN ls -l /app
 
 # Definisce il comando di esecuzione predefinito
-CMD ["python", "DataReceiver.py"]
+CMD ["python", "Receiver.py"]

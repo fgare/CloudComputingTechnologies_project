@@ -15,10 +15,11 @@ class DataReceiver:
     def _connect(self):
         while True:
             try:
-                client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-                client.connect(HOST, 1883, 60)
-                client.username_pw_set(username='federico', password='mosquitto')
+                client = mqtt.Client()
                 client.on_message = self.on_message
+                client.on_connect = self.on_connect
+                client.connect(HOST, 1883, 60)
+                # client.username_pw_set(username='federico', password='mosquitto')
                 return client
             except Exception as e:
                 self.logger.error("Connection failed\n" + str(e))
@@ -29,10 +30,13 @@ class DataReceiver:
         StoreConnector(hierarchy[1], hierarchy[2], msg.payload.decode()).run()
         self.logger.info(f"Received {msg.payload.decode()}")
 
+    def on_connect(self, client, userdata, flags, rc):
+        self.logger.info(f"Connected with {HOST}, result code {rc}")
+        client.subscribe(TOPIC, qos=1)
+
     def run(self):
         self.logger.info("Started MQTT connection")
         client = self._connect()
-        client.subscribe(TOPIC)
         self.logger.debug("Connected and subscribed to MQTT server")
         client.loop_forever()
 

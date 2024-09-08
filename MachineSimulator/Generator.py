@@ -1,18 +1,22 @@
 import datetime
 import time
+
+from typing_extensions import override
+
 from Sender import Sender
 import random
 import threading
 
 
 class Generator(threading.Thread):
-    def __init__(self, customer, machine):
+    def __init__(self, customer:str, machine:str):
         threading.Thread.__init__(self)
         self.customer = customer
         self.machine = machine
         self.topic = 'data/' + customer + '/' + machine
         self.sender = Sender(self.topic)
 
+    @override
     def run(self):
         mean = random.randint(0, 100)
         while True:

@@ -32,11 +32,8 @@ class DBConnector(threading.Thread):
 
     def _connect(self):
         try:
-            server = MongoClient(host='mongodb',
-                                 port=27017,
-                                 username="federico",
-                                 password="m0ng0",
-                                 authSource=DBNAME)
+            server = MongoClient(host='localhost',
+                                 port=27017)
             self.db = server[DBNAME]
             self.collection = self.db[COLLECTION]
             self.logger.debug("Connected to MongoDB")
@@ -50,8 +47,7 @@ class DBConnector(threading.Thread):
 
     def run(self):
         self._connect()
-        id = self.insert_document()
-        self.logger.info("document _id " + id)
+        doc_id = self.insert_document()
 
 
 if __name__ == "__main__":

@@ -1,9 +1,0 @@
-db.measurements.find({})
-db.measurements.insertOne({ "customer": "customer1", "machine": "machine1", "date": "2024-07-23T10:02:03", "EE": 5 })
-db.measurements.find({})
-show dbs
-use cct
-show dbsb.measurements.find({})
-show dbs
-use cct
-show dbs
