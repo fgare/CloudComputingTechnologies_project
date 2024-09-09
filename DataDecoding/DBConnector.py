@@ -32,7 +32,7 @@ class DBConnector(threading.Thread):
 
     def _connect(self):
         try:
-            server = MongoClient(host='localhost',
+            server = MongoClient(host='mongodb',
                                  port=27017)
             self.db = server[DBNAME]
             self.collection = self.db[COLLECTION]
