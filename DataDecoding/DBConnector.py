@@ -48,6 +48,7 @@ class DBConnector(threading.Thread):
     def run(self):
         self._connect()
         doc_id = self.insert_document()
+        self.logger.info(f"document inserted with _id: {doc_id}")
 
 
 if __name__ == "__main__":

@@ -1,13 +1,14 @@
 from flask import Flask, request, jsonify
-from DBConnector import DBConnector
+from MeasureManager import MeasureManager
 
-class SimpleAPI:
+
+class APIService:
     def __init__(self):
         self.app = Flask(__name__)
         self.setup_routes()
 
     def setup_routes(self):
-        @self.app.route('/api/data', methods=['POST'])
+        @self.app.route('/data', methods=['POST'])
         def post_data():
             # Recupera i dati dal corpo della richiesta JSON
             data = request.get_json()
@@ -22,7 +23,7 @@ class SimpleAPI:
                 "message": "Data successfully received!"
             }
 
-            DBConnector(data)
+            MeasureManager(topic=data['path'], datum=data['measure']).write_measure()
 
             return jsonify(response_data), 200
 
@@ -31,5 +32,5 @@ class SimpleAPI:
 
 # Istanzia e avvia l'API
 if __name__ == '__main__':
-    api = SimpleAPI()
+    api = APIService()
     api.run()

@@ -13,7 +13,7 @@ class Generator(threading.Thread):
         threading.Thread.__init__(self)
         self.customer = customer
         self.machine = machine
-        self.topic = 'data/' + customer + '/' + machine
+        self.topic = 'data.' + customer + '.' + machine
         self.sender = Sender(self.topic)
 
     @override

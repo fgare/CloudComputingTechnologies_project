@@ -1,6 +1,5 @@
 import time
-
-import paho.mqtt.client as mqtt
+import redis
 from StoreConnector import StoreConnector
 from Useful import Useful
 
@@ -15,15 +14,14 @@ class DataReceiver:
     def _connect(self):
         while True:
             try:
-                client = mqtt.Client()
-                client.on_message = self.on_message
-                client.on_connect = self.on_connect
-                client.connect(HOST, 1883, 60)
-                # client.username_pw_set(username='federico', password='mosquitto')
-                return client
+                r = redis.Redis(host='redis', port=6379, decode_responses=True)
+                self.logger.info(f'Connected to Redis\n{r}')
+                return r
             except Exception as e:
                 self.logger.error("Connection failed\n" + str(e))
                 time.sleep(5)
+
+
 
     def on_message(self, client, userdata, msg):
         hierarchy = msg.topic.split('/')

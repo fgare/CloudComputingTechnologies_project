@@ -10,10 +10,10 @@ class MeasureManager:
 
     def decode_packet(self):
         self.datum = Decoder.decode_hex(self.datum)
-        print("Datum ", self.datum)
+#        print("Datum ", self.datum)
 
     def _get_topic_hierarchy(self):
-        return self.topic.split('/')
+        return self.topic.split('.')
 
     def _prepare_document(self):
         hierarchy = self._get_topic_hierarchy()

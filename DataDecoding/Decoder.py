@@ -30,6 +30,6 @@ class Decoder:
 
         # Converti la parte del numero esadecimale in un intero
         numero = int(numero_hex, 16)
-        print(data_ora, numero)
+        print("Decoded ", data_ora, numero)
 
         return data_ora, numero
