@@ -32,8 +32,7 @@ class Receiver:
                 # self.logger.info(f"Received {content} on channel {channel}")
 
     def run(self):
-        self.logger.info("Avviato")
-        server = self._connect()
+        self.logger.info("Started")
         self.listen()
 
 

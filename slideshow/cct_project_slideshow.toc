@@ -4,7 +4,7 @@
 \beamer@subsectionintoc {1}{2}{General structure}{4}{0}{1}
 \beamer@sectionintoc {2}{Detailed view}{5}{0}{2}
 \beamer@subsectionintoc {2}{1}{Data Generator}{5}{0}{2}
-\beamer@subsectionintoc {2}{2}{Mosquitto}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Redis}{6}{0}{2}
 \beamer@subsectionintoc {2}{3}{Data decoding}{7}{0}{2}
 \beamer@subsectionintoc {2}{4}{MongoDB Database}{8}{0}{2}
 \beamer@subsectionintoc {2}{5}{Store connector}{9}{0}{2}

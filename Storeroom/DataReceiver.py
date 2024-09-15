@@ -3,13 +3,11 @@ import redis
 from StoreConnector import StoreConnector
 from Useful import Useful
 
-HOST = 'mosquitto'  # indirizzo del server MQTT
-TOPIC = 'data/#'
-
 
 class DataReceiver:
     def __init__(self):
         self.logger = Useful.getLogger('DataReceiver')
+        self.server = self._connect()
 
     def _connect(self):
         while True:
@@ -21,22 +19,22 @@ class DataReceiver:
                 self.logger.error("Connection failed\n" + str(e))
                 time.sleep(5)
 
+    def listen(self):
+        listener = self.server.pubsub()
+        listener.psubscribe('data.*')  # iscrizione secondo un pattern
+        for message in listener.listen():
+            print(message)
+            if message['type'] == 'pmessage' or message['type'] == 'message':
+                content = message['data']
+                channel = message['channel']
+                hierarchy = channel.split('.')
+                StoreConnector(hierarchy[1], hierarchy[2], content).run()
+                self.logger.info(f"Received {content} on channel {channel}")
 
-
-    def on_message(self, client, userdata, msg):
-        hierarchy = msg.topic.split('/')
-        StoreConnector(hierarchy[1], hierarchy[2], msg.payload.decode()).run()
-        self.logger.info(f"Received {msg.payload.decode()}")
-
-    def on_connect(self, client, userdata, flags, rc):
-        self.logger.info(f"Connected with {HOST}, result code {rc}")
-        client.subscribe(TOPIC, qos=1)
 
     def run(self):
-        self.logger.info("Started MQTT connection")
-        client = self._connect()
-        self.logger.debug("Connected and subscribed to MQTT server")
-        client.loop_forever()
+        self.logger.info("Started")
+        self.listen()
 
 
 if __name__ == '__main__':

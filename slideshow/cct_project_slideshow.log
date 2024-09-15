@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.6)  8 SEP 2024 11:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.4.6)  16 SEP 2024 00:07
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1087,21 +1087,21 @@ Package pdftex.def Info: img/unimi_logo2.png  used on input line 60.
 [5
 
  <./drawings/MachinesHierarchy.pdf>]
-<./img/mqttBroker.png, id=154, 1405.25pt x 462.72874pt>
-File: ./img/mqttBroker.png Graphic file (type png)
-<use ./img/mqttBroker.png>
-Package pdftex.def Info: ./img/mqttBroker.png  used on input line 77.
-(pdftex.def)             Requested size: 239.70367pt x 78.93115pt.
+<./img/redis-publish-subscriber.png, id=154, 752.8125pt x 342.5297pt>
+File: ./img/redis-publish-subscriber.png Graphic file (type png)
+<use ./img/redis-publish-subscriber.png>
+Package pdftex.def Info: ./img/redis-publish-subscriber.png  used on input line
+ 77.
+(pdftex.def)             Requested size: 239.70367pt x 109.06294pt.
 File: img/unimi_logo2.png Graphic file (type png)
 <use img/unimi_logo2.png>
 Package pdftex.def Info: img/unimi_logo2.png  used on input line 77.
 (pdftex.def)             Requested size: 28.41418pt x 28.45274pt.
  [6
 
- <./img/mqttBroker.png (PNG copy)>]
+ <./img/redis-publish-subscriber.png>]
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
 87.
-
 (c:/texlive/2024/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
@@ -1140,7 +1140,7 @@ Package pdftex.def Info: img/unimi_logo2.png  used on input line 106.
  [7
 
 {c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<./img/MongoDB-Logo.png, id=172, 3854.4pt x 2409.0pt>
+<./img/MongoDB-Logo.png, id=174, 3854.4pt x 2409.0pt>
 File: ./img/MongoDB-Logo.png Graphic file (type png)
 <use ./img/MongoDB-Logo.png>
 Package pdftex.def Info: ./img/MongoDB-Logo.png  used on input line 122.
@@ -1172,7 +1172,7 @@ Package pdftex.def Info: img/unimi_logo2.png  used on input line 138.
  [9
 
 ]
-<./img/buckets.png, id=187, 660.4675pt x 343.2825pt>
+<./img/buckets.png, id=189, 660.4675pt x 343.2825pt>
 File: ./img/buckets.png Graphic file (type png)
 <use ./img/buckets.png>
 Package pdftex.def Info: ./img/buckets.png  used on input line 154.
@@ -1200,30 +1200,30 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
  ***********
 Package rerunfilecheck Info: File `cct_project_slideshow.out' has not changed.
-(rerunfilecheck)             Checksum: 5C31732592FC202D0F752648417E4CB3;1295.
+(rerunfilecheck)             Checksum: 42C2AEE81213CD9D4ED7091346B21C2F;1275.
 runsystem(del cct_project_slideshow.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 26289 strings out of 476012
- 515853 string characters out of 5791665
+ 26291 strings out of 476012
+ 515977 string characters out of 5791665
  1936496 words of memory out of 5000000
- 47824 multiletter control sequences out of 15000+600000
- 569746 words of font info for 67 fonts, out of 8000000 for 9000
+ 47825 multiletter control sequences out of 15000+600000
+ 570573 words of font info for 68 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  128i,15n,123p,506b,701s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/tex
-live/2024/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb><c:/texlive/2024/
-texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb><c:/texlive/2024/texmf-dist
-/fonts/type1/public/cm-super/sfss1000.pfb><c:/texlive/2024/texmf-dist/fonts/typ
-e1/public/cm-super/sfss1095.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/
-cm-super/sfss1440.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/s
-ftt1000.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1095.pf
-b>
-Output written on cct_project_slideshow.pdf (10 pages, 734586 bytes).
+live/2024/texmf-dist/fonts/type1/public/cm-super/sfsi1095.pfb><c:/texlive/2024/
+texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb><c:/texlive/2024/texmf-dist
+/fonts/type1/public/cm-super/sfss0800.pfb><c:/texlive/2024/texmf-dist/fonts/typ
+e1/public/cm-super/sfss1000.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/
+cm-super/sfss1095.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/s
+fss1440.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.pf
+b><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on cct_project_slideshow.pdf (10 pages, 681336 bytes).
 PDF statistics:
- 241 PDF objects out of 1000 (max. 8388607)
- 171 compressed objects within 2 object streams
+ 247 PDF objects out of 1000 (max. 8388607)
+ 174 compressed objects within 2 object streams
  31 named destinations out of 1000 (max. 500000)
  206 words of extra memory for PDF output out of 10000 (max. 10000000)
 

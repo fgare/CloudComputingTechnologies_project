@@ -53,14 +53,14 @@ services:
       - can
 
   storeroom:
-    image: storeroom-i:6
+    image: storeroom:1
     container_name: storeroom
     restart: always
     networks:
       - can
 
 # volumes:
-#   # mongodb_data:
+#   mongodb_data:
 #   minio_data:
 
 networks:
