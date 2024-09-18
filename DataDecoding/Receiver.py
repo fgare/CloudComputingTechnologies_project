@@ -15,7 +15,12 @@ class Receiver:
     def _connect(self) -> redis.Redis:
         while True:
             try:
-                r = redis.Redis(host='redis', port=6379, decode_responses=True)
+                r = redis.Redis(
+                    host='redis',
+                    port=6379,
+                    username='subscriber',
+                    password='sub',
+                    decode_responses=True)
                 self.logger.info(f'Connected to Redis\n{r}')
                 return r
             except Exception as e:

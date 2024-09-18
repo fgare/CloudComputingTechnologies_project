@@ -13,7 +13,13 @@ class Sender:
     # si connette al server redis
     def _connect(self) -> redis.Redis:
         try:
-            r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+            r = redis.Redis(
+                host='localhost',
+                port=6379,
+                username='customer',
+                password='customerpass',
+                db=0,
+                decode_responses=True)
             print(f"Connected to Redis server\n{r}")
             return r
         except Exception as e:
