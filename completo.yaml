@@ -13,6 +13,11 @@ services:
 #      - C:\Users\Federico\Documents\GitHub\cct_project\persistentData\mongodb:/data/db
     networks:
       - can
+    healthcheck:
+      test: ["CMD","mongosh","--eval","db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   redis:
     image: redis/redis-stack:latest
@@ -23,6 +28,11 @@ services:
       - "8001:8001"
     networks:
       - can
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   minio:
     image: quay.io/minio/minio:latest
@@ -39,9 +49,14 @@ services:
     command: server /data --console-address ":9001"
     networks:
       - can
+    healthcheck:
+      test: ["CMD","curl","-I","https://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     
   decoding:
-    image: decoding:1
+    image: decoding:2
     container_name: decoding
     restart: always
     depends_on:
@@ -51,13 +66,23 @@ services:
     #   - 5000:5000
     networks:
       - can
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   storeroom:
-    image: storeroom:1
+    image: storeroom:2
     container_name: storeroom
     restart: always
     networks:
       - can
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
 # volumes:
 #   mongodb_data:

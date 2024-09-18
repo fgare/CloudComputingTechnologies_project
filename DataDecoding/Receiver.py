@@ -2,12 +2,15 @@ import time
 import redis
 from MeasureManager import MeasureManager
 from Useful import Useful
+from APIService import APIService
 
 
 class Receiver:
     def __init__(self):
         self.logger = Useful.getLogger('Decoding-receiver')
         self.server = self._connect()
+        self.api_server = APIService()
+        self.api_server.run()
 
     def _connect(self) -> redis.Redis:
         while True:
@@ -30,6 +33,7 @@ class Receiver:
                 channel = message['channel']
                 MeasureManager(channel, content).write_measure()
                 # self.logger.info(f"Received {content} on channel {channel}")
+                self.api_server.update()
 
     def run(self):
         self.logger.info("Started")

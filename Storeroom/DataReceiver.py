@@ -2,12 +2,14 @@ import time
 import redis
 from StoreConnector import StoreConnector
 from Useful import Useful
+from APIService import APIService
 
 
 class DataReceiver:
     def __init__(self):
         self.logger = Useful.getLogger('DataReceiver')
         self.server = self._connect()
+        self.api_server = APIService()
 
     def _connect(self):
         while True:
@@ -29,11 +31,13 @@ class DataReceiver:
                 channel = message['channel']
                 hierarchy = channel.split('.')
                 StoreConnector(hierarchy[1], hierarchy[2], content).run()
-                self.logger.info(f"Received {content} on channel {channel}")
+                # self.logger.info(f"Received {content} on channel {channel}")
+                self.api_server.update()
 
 
     def run(self):
         self.logger.info("Started")
+        self.api_server.run()
         self.listen()
 
 
