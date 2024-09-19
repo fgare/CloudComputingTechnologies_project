@@ -7,6 +7,8 @@
 \beamertemplatenavigationsymbolsempty
 \usepackage{graphicx}
 \usepackage{minted}
+\usepackage[font=small]{caption}
+\usepackage{multicol}
 
 \title[Cloud Comp. Technologies project]{Microservices architecture for collecting data related to electric consumption}
 \subtitle{Cloud Computing Technologies project}
@@ -18,7 +20,13 @@
 \begin{document}
 	\frame{\titlepage}
 	
-	\input{slides/slides.tex}
+	\begin{frame}
+		\frametitle{Table of contents}
+		\tableofcontents
+	\end{frame}
 	
+	\input{slides/overview.tex}
+	\input{slides/details.tex}
+	\input{slides/cloud_properties.tex}
 	
 \end{document}

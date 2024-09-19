@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{        }\PYG{n+nt}{mongodb}\PYG{p}{:}
+\PYG{+w}{          }\PYG{n+nt}{image}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{mongo:latest}
+\PYG{+w}{          }\PYG{n+nt}{container\PYGZus{}name}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{mongodb}
+\PYG{+w}{          }\PYG{n+nt}{restart}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{always}
+\end{Verbatim}

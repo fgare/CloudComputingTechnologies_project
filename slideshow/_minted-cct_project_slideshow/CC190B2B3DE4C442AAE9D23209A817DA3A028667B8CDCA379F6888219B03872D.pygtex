@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+			user default off
+			user customer on \PYGZgt{}customerpass +PUBLISH \PYGZam{}data.*
+			user admin on \PYGZgt{}admin \PYGZti{}* \PYGZam{}* +@all
+			user decoding on \PYGZgt{}dec +PSUBSCRIBE \PYGZam{}data.*
+			user storeroom on \PYGZgt{}store +PSUBSCRIBE \PYGZam{}data.*
+\end{Verbatim}

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{		}\PYG{err}{user}\PYG{+w}{ }\PYG{err}{de}\PYG{k+kc}{fault}\PYG{+w}{ }\PYG{err}{o}\PYG{k+kc}{ff}
+\PYG{+w}{		}\PYG{err}{user}\PYG{+w}{ }\PYG{err}{cus}\PYG{k+kc}{t}\PYG{err}{omer}\PYG{+w}{ }\PYG{err}{o}\PYG{k+kc}{n}\PYG{+w}{ }\PYG{err}{\PYGZgt{}cus}\PYG{k+kc}{t}\PYG{err}{omerpass}\PYG{+w}{ }\PYG{err}{+PUBLISH}\PYG{+w}{ }\PYG{err}{\PYGZam{}da}\PYG{k+kc}{ta}\PYG{err}{.*}
+\PYG{+w}{		}\PYG{err}{user}\PYG{+w}{ }\PYG{err}{admi}\PYG{k+kc}{n}\PYG{+w}{ }\PYG{err}{o}\PYG{k+kc}{n}\PYG{+w}{ }\PYG{err}{\PYGZgt{}admi}\PYG{k+kc}{n}\PYG{+w}{ }\PYG{err}{\PYGZti{}*}\PYG{+w}{ }\PYG{err}{\PYGZam{}*}\PYG{+w}{ }\PYG{err}{+@all}
+\PYG{+w}{		}\PYG{err}{user}\PYG{+w}{ }\PYG{err}{decodi}\PYG{k+kc}{n}\PYG{err}{g}\PYG{+w}{ }\PYG{err}{o}\PYG{k+kc}{n}\PYG{+w}{ }\PYG{err}{\PYGZgt{}dec}\PYG{+w}{ }\PYG{err}{+PSUBSCRIBE}\PYG{+w}{ }\PYG{err}{\PYGZam{}da}\PYG{k+kc}{ta}\PYG{err}{.*}
+\PYG{+w}{		}\PYG{err}{user}\PYG{+w}{ }\PYG{err}{s}\PYG{k+kc}{t}\PYG{err}{oreroom}\PYG{+w}{ }\PYG{err}{o}\PYG{k+kc}{n}\PYG{+w}{ }\PYG{err}{\PYGZgt{}s}\PYG{k+kc}{t}\PYG{err}{ore}\PYG{+w}{ }\PYG{err}{+PSUBSCRIBE}\PYG{+w}{ }\PYG{err}{\PYGZam{}da}\PYG{k+kc}{ta}\PYG{err}{.*}
+\end{Verbatim}

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n+nt}{healthcheck}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nt}{test}\PYG{p}{:}\PYG{+w}{ }\PYG{p+pIndicator}{[}\PYG{l+s}{\PYGZdq{}CMD\PYGZdq{}}\PYG{p+pIndicator}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}curl\PYGZdq{}}\PYG{p+pIndicator}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZhy{}\PYGZhy{}fail\PYGZdq{}}\PYG{p+pIndicator}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}http://localhost:5000/health\PYGZdq{}}\PYG{p+pIndicator}{]}
+\PYG{+w}{      }\PYG{n+nt}{interval}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{30s}
+\PYG{+w}{      }\PYG{n+nt}{timeout}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{10s}
+\PYG{+w}{      }\PYG{n+nt}{retries}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{3}
+\end{Verbatim}

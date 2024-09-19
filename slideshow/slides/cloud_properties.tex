@@ -1,0 +1,65 @@
+\section{Cloud properties}
+
+\subsection{Health checks}
+\begin{frame}[containsverbatim]
+	\frametitle{Health checks}
+	
+	\begin{itemize}
+		\item It is a Docker instruction to determine the state of a container (\emph{healthy}/\emph{unhealthy}).
+		\item Health checks are performed at regular intervals.
+		\item They aim to provide \emph{reliability}, \emph{resilience}, \emph{self-healing}.
+	\end{itemize}
+	
+	\begin{figure}[h]
+		\begin{minted}[tabsize=2, fontsize=\small]{yaml}
+      healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 30s
+        timeout: 10s
+        retries: 3
+		\end{minted}
+		\caption{Health check definition for Redis container}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Health checks}
+	
+	Health checks aim to provide
+	\begin{itemize}
+		\item \emph{Reliability}: they monitor that an application is working properly;
+		\item \emph{Resilience} and \emph{Self-healing}: it is possible to detect a fault and reboot the service.
+	\end{itemize}
+	
+	\begin{figure}[h]
+		\begin{minted}[tabsize=2, fontsize=\small, breaklines]{yaml}
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+		\end{minted}
+		\caption{Health check definition for Decoding container}
+	\end{figure}
+\end{frame}
+
+\subsection{Restart policies}
+\begin{frame}[containsverbatim]
+	\frametitle{Restart policies}
+	
+	\begin{itemize}
+		\item They define how Docker should handle containers when they stop or crash.
+		\item This policies are important to guarantee \emph{reliability} and \emph{high availability}.
+		\item For each container the policy \mintinline{yaml}|restart: always| is set, this means that the service is always restarted regardless the cause stopping it.
+	\end{itemize}
+	
+	\begin{figure}[h]
+		\begin{minted}[tabsize=2, fontsize=\small, breaklines]{yaml}
+        mongodb:
+          image: mongo:latest
+          container_name: mongodb
+          restart: always
+		\end{minted}
+		\caption{Definition of the restart policy for MongoDB}
+	\end{figure}
+\end{frame}

@@ -1,45 +1,3 @@
-\begin{frame}
-	\frametitle{Table of contents}
-	\tableofcontents
-\end{frame}
-
-\section{View from above}
-
-\subsection{Domain of use}
-\begin{frame}
-	\frametitle{Application domain and working principle}
-	
-	\begin{itemize}
-		\item Industrial environment.\\
-		\item An energy meter sends data regarding the electric consumption of a machinery through the internet.\\
-		\item Data are received, analysed and collected by the cloud application.
-	\end{itemize}
-	
-	\bigskip
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=0.5\textwidth]{./img/general_domain.png}
-	\end{figure}
-\end{frame}
-
-
-\subsection{General structure}
-\begin{frame}
-	\frametitle{General structure of the system}
-	
-	\begin{itemize}
-		\item 5 microservices.
-		\item Every microservice carry on a specific task.
-		\item Only one entry point.
-	\end{itemize}
-	
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=0.8\textwidth]{./drawings/general_scheme.pdf}
-	\end{figure}
-\end{frame}
-
-
 \section{Detailed view}
 
 \subsection{Data Generator}
@@ -49,7 +7,7 @@
 	\begin{itemize}
 		\item It simulates data produced by each power meter.
 		\item It publish data on a specific Redis channel.\\
-			E.g. Data from \texttt{machine1} of \texttt{customer1} are published on \texttt{data.customer1.machine1}
+		E.g. Data from \texttt{machine1} of \texttt{customer1} are published on \texttt{data.customer1.machine1}
 	\end{itemize}
 	
 	\bigskip
@@ -67,12 +25,40 @@
 	\begin{itemize}
 		\item It is a key-value database that offers the functionalities of a message broker.
 		\item It receives data from all the meters and forward them to two microservices: \emph{DataDecoding} and \emph{Storeroom}.
-		\item It is the entry point of the entire system.
+		\item It is the entry point of the entire system. It exposes the port 6379.
 	\end{itemize}
 	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.7\textwidth]{./img/redis-publish-subscriber.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Redis}
+	
+	\begin{itemize}
+		\item Publishers need to authenticate before starting to send data.
+		\item A list of users is defined inside an \emph{Access Control List} (ACL).
+		\item Each user can perform only a subset of commands.
+	\end{itemize}
+	
+	\begin{figure}[h]
+		\begin{minted}[tabsize=2, fontsize=\small]{text}
+			user default off
+			user customer on >customerpass +PUBLISH &data.*
+			user admin on >admin ~* &* +@all
+			user decoding on >dec +PSUBSCRIBE &data.*
+			user storeroom on >store +PSUBSCRIBE &data.*
+		\end{minted}
+		\caption{File \texttt{redis.conf} specifing the ACL}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\begin{minted}[tabsize=2, fontsize=\small, breaklines]{python}
+			r = redis.Redis(host='redis', port=6379, username='decoding', password='dec', decode_responses=True)
+		\end{minted}
+		\caption{Connection to Redis server in a Python script}
 	\end{figure}
 \end{frame}
 
@@ -82,7 +68,7 @@
 	\frametitle{Data decoding}
 	
 	\begin{itemize}
-		\item It subscribes to Redis channel '\verb|data.*|'.
+		\item It authenticates in Redis and subscribes to channel '\verb|data.*|'.
 		\item It receives a hexadecimal string that is split to obtain data, hour and numeric value of the measure.\\
 		E.g. \verb|'2024-09-07T19:53:19.561339'| $\rightarrow$ \verb|'1268b41553b7'|\\
 		Numeric value \verb|68 DEC| $\rightarrow$ \verb|44 HEX|.\\
@@ -107,18 +93,33 @@
 
 
 \subsection{MongoDB Database}
-\begin{frame}
+\begin{frame}[containsverbatim]
 	\frametitle{MongoDB Database}
 	
 	\begin{itemize}
 		\item It stores all measurements.
-		\item It provides all data if a user wants to download or visualize them.
+		\item Clients use a specific user called \texttt{'client-1'} with only read and write permissions.
+		\item DB and users are defined in a JavaScript file executed at the start-up of container.
 	\end{itemize}
 	
 	\begin{figure}[h]
-		\centering
-		\includegraphics[width=0.5\textwidth]{./img/MongoDB-Logo.png}
+		\begin{minted}[tabsize=2, fontsize=\small]{js}
+			db = db.getSiblingDB('cct')
+			db.createCollection('measurements')
+			db.createUser({
+				user: "client-1",
+				pwd:  "client-1",
+				roles:[{role: "readWrite" , db:"cct"}]
+			})
+		\end{minted}
+		\caption{Configuration file of MongoDB}
 	\end{figure}
+	
+	%	\begin{figure}[h]
+		%		\centering
+		%		\includegraphics[width=0.3\textwidth]{./img/MongoDB-Logo.png}
+		%	\end{figure}
+	
 \end{frame}
 
 
@@ -130,8 +131,8 @@
 		\item It subscribes to Redis channel '\verb|data.*|'.
 		\item It encapsulates raw data (hexadecimal strings) into text files.
 		\item A unique filename is set to every file, given following this scheme
-			\mintinline{python}|f"{self.machine_name}_{current_time}_{unique_id}"|,
-			where \mintinline{python}|unique_id = uuid.uuid4()|.
+		\mintinline{python}|f"{self.machine_name}_{current_time}_{unique_id}"|,
+		where \mintinline{python}|unique_id = uuid.uuid4()|.
 		\item Files are sent for permanent storage.
 	\end{itemize}
 	
@@ -152,8 +153,3 @@
 		\includegraphics[width=0.5\textwidth]{./img/buckets.png}
 	\end{figure}
 \end{frame}
-
-
-
-
-
