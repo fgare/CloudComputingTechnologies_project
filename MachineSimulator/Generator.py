@@ -24,7 +24,7 @@ class Generator(threading.Thread):
             value = int(random.random()*(1.2*mean - 0.8*mean) + 0.8*mean)
             now = datetime.datetime.now()
             self.sender.publish(now, value)
-            print("Invio ", now, ", ", value)
+            # print("Invio ", now, ", ", value)
             time.sleep(5)
 
 

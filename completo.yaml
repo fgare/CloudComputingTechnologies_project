@@ -3,14 +3,14 @@ services:
     image: mongo:latest
     container_name: mongodb
     restart: always
-    # ports:
-      # - "27017:27017"
-#    environment:
-#      - MONGO_INITDB_ROOT_USERNAME='federico'
-#      - MONGO_INITDB_ROOT_PASSWORD='m0ng0'
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: federico
+      MONGO_INITDB_ROOT_PASSWORD: m0ng0
+      MONGO_INITDB_DATABASE: cct
     volumes:
-      - ./persistentData/mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-#      - C:\Users\Federico\Documents\GitHub\cct_project\persistentData\mongodb:/data/db
+      - .\persistentData\mongodb\mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
     networks:
       - can
     healthcheck:
@@ -59,7 +59,7 @@ services:
       retries: 3
     
   decoding:
-    image: decoding:2
+    image: decoding:6
     container_name: decoding
     restart: always
     depends_on:
@@ -76,7 +76,7 @@ services:
       retries: 3
 
   storeroom:
-    image: storeroom:2
+    image: storeroom:5
     container_name: storeroom
     restart: always
     networks:

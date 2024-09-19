@@ -1,5 +1,7 @@
 from pymongo import MongoClient
 import threading
+import datetime
+
 from Useful import Useful
 
 DBNAME = "cct"
@@ -33,7 +35,10 @@ class DBConnector(threading.Thread):
     def _connect(self):
         try:
             server = MongoClient(host='mongodb',
-                                 port=27017)
+                                 port=27017,
+                                 authSource='cct',
+                                 username="client-1",
+                                 password="client-1")
             self.db = server[DBNAME]
             self.collection = self.db[COLLECTION]
             self.logger.debug("Connected to MongoDB")
@@ -55,7 +60,7 @@ if __name__ == "__main__":
     doc = {
         "customer": "customer1",
         "machine": "machine1",
-        "date": '2024-07-18T18:05:05Z',
+        "date": datetime.datetime(2024,7,18,18,5,5),
         "EE": 32
     }
     connector = DBConnector(doc)

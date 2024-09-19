@@ -1,5 +1,6 @@
 import time
 import redis
+import threading
 from MeasureManager import MeasureManager
 from Useful import Useful
 from APIService import APIService
@@ -10,7 +11,7 @@ class Receiver:
         self.logger = Useful.getLogger('Decoding-receiver')
         self.server = self._connect()
         self.api_server = APIService()
-        self.api_server.run()
+        self.api_server.start()
 
     def _connect(self) -> redis.Redis:
         while True:
@@ -18,8 +19,8 @@ class Receiver:
                 r = redis.Redis(
                     host='redis',
                     port=6379,
-                    username='subscriber',
-                    password='sub',
+                    username='decoding',
+                    password='dec',
                     decode_responses=True)
                 self.logger.info(f'Connected to Redis\n{r}')
                 return r

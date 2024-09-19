@@ -1,8 +1,10 @@
+import threading
 from flask import Flask, request, jsonify
 from datetime import datetime
 
-class APIService:
+class APIService(threading.Thread):
     def __init__(self):
+        threading.Thread.__init__(self)
         self.app = Flask(__name__)
         self.setup_routes()
         self.last_update = datetime.now()

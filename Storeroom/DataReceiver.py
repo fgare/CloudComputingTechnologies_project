@@ -10,6 +10,7 @@ class DataReceiver:
         self.logger = Useful.getLogger('DataReceiver')
         self.server = self._connect()
         self.api_server = APIService()
+        self.api_server.start()
 
     def _connect(self):
         while True:
@@ -17,8 +18,8 @@ class DataReceiver:
                 r = redis.Redis(
                     host='redis',
                     port=6379,
-                    username='subscriber',
-                    password='sub',
+                    username='storeroom',
+                    password='store',
                     decode_responses=True)
                 self.logger.info(f'Connected to Redis\n{r}')
                 return r
@@ -42,7 +43,6 @@ class DataReceiver:
 
     def run(self):
         self.logger.info("Started")
-        self.api_server.run()
         self.listen()
 
 
